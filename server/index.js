@@ -1,0 +1,101 @@
+const { MongoClient } = require("mongodb");
+const http = require('http');
+
+const server = http.createServer();
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+
+var database_uri = process.env.DATABASE_URI || 'localhost';
+const client = new MongoClient(`mongodb://${database_uri}:27017`);
+
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Failed to connect to MongoDB', error);
+  }
+}
+connectToDatabase();
+
+const rooms = {};
+
+function broadcastGameState(room, column, playerColor, origin) {
+  const message = JSON.stringify({ type: 'newMove', column, playerColor, origin });
+  io.to(room).emit('message', message);
+}
+
+io.on('connection', (socket) => {
+  console.log('Client connected');
+
+  socket.on('joinRoom', () => {
+    let joined = false;
+    for (const [room, players] of Object.entries(rooms)) {
+        if (players.length < 2) {
+            socket.join(room);
+            players.push(socket);
+            const playerColor = players.length === 1 ? 'red' : 'blue';
+            socket.emit('joinRoom', { room, color: playerColor });
+            joined = true;
+            break;
+        }
+    }
+    
+    if (!joined) {
+        const room = `room${Object.keys(rooms).length + 1}`;
+        socket.join(room);
+        rooms[room] = [socket];
+        socket.emit('joinRoom', { room, color: 'red' });
+    }
+  });
+
+  socket.on('move', (data) => {
+      const { column, playerColor, room, origin } = JSON.parse(data);
+      
+      if (!rooms[room]) {
+          console.error('Invalid room');
+          return;
+      }
+
+      // Use room-based game state
+      if (!rooms[room].gameState) {
+          rooms[room].gameState = Array.from({ length: 6 }, () => Array(7).fill(null));
+      }
+      const gameState = rooms[room].gameState;
+      
+      for (let row = 5; row >= 0; row--) {
+          if (gameState[row][column] === null) {
+              gameState[row][column] = playerColor;
+              break;
+          }
+      }
+
+      // Broadcast the updated game state to all connected clients in the room
+      broadcastGameState(room, column, playerColor, origin);
+
+      // Notify the other player that it's their turn
+      const otherPlayer = rooms[room].find((player) => player.id !== socket.id);
+      if (otherPlayer) {
+          otherPlayer.emit('yourTurn');
+      }
+
+  });
+
+  socket.on('reset', () => {
+    socket.broadcast.emit('reset');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});

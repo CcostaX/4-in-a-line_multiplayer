@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - public:/usr/app/client/public
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - public:/usr/app/client/public
+    ports:
+      - "8080:8080"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+volumes:
+  public:
