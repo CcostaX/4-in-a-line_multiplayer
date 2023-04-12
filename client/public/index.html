@@ -8,7 +8,13 @@
 </head>
 <body>
     <h1>4 in a Line</h1>
-    <div id="game-board"></div>
+    <div id="game-container">
+      <div id="winners-list">
+        <h2>Winners</h2>
+        <ul id="winners"></ul>
+      </div>
+      <div id="game-board"></div>
+    </div>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <p id="textPlayerTurn">Waiting for players!</p>
     <button id="reset-button">Reset</button>

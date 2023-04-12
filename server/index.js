@@ -17,6 +17,7 @@ server.listen(port, () => {
 
 var database_uri = process.env.DATABASE_URI || 'localhost';
 const client = new MongoClient(`mongodb://${database_uri}:27017`);
+const messages_collection = client.db('game').collection('messages')
 
 async function connectToDatabase() {
   try {
@@ -37,6 +38,12 @@ function broadcastGameState(room, column, playerColor, origin) {
 
 io.on('connection', (socket) => {
   console.log('Client connected');
+
+  messages_collection.find().toArray().then( (data) => {
+    data.forEach(element => {
+      socket.emit("history", element.text);
+    });
+  });
 
   socket.on('joinRoom', () => {
     let joined = false;
@@ -90,6 +97,16 @@ io.on('connection', (socket) => {
       }
 
   });
+
+  socket.on('win', async (winnerColor) => {
+    const obj = { 'date': new Date(), 'text': winnerColor };
+    messages_collection.insertOne(obj);
+    
+    socket.broadcast.emit('history', winnerColor); 
+    socket.emit('history', winnerColor); 
+  });
+
+  
 
   socket.on('reset', () => {
     socket.broadcast.emit('reset');

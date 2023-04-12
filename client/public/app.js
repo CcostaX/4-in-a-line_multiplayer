@@ -4,6 +4,7 @@ const board = document.getElementById('game-board');
 const textWin = document.getElementById('textWin');
 const textPlayerTurn = document.getElementById('textPlayerTurn');
 const resetButton = document.getElementById('reset-button');
+const winnersList = document.getElementById('winners');
 
 const rows = 6;
 const columns = 7;
@@ -44,11 +45,22 @@ socket.on('yourTurn', () => {
     textPlayerTurn.innerHTML = "My turn!";
 });
 
+socket.on('history', (data) => {
+  const listItem = document.createElement('li');
+  listItem.innerHTML = `Winner: <span class="winner-color">${data}</span>`;
+  listItem.querySelector('.winner-color').style.color = data;
+  winnersList.appendChild(listItem);
+})
+
+
 socket.on('reset', () => {
     hideButton();
     resetGame();
 });
-  
+
+
+
+
 
 // Create the game board
 for (let i = 0; i < rows; i++) {
@@ -106,6 +118,7 @@ function dropPiece(column, playerColor, isRemoteMove = false) {
             textWin.innerHTML = `${playerColor} player wins!`;
             gameFinish = true;
             showButton();
+            if (!isRemoteMove) socket.emit('win', playerColor);
         }
     }
 }
@@ -125,12 +138,6 @@ function updateBoard(gameState) {
                 cell.classList.remove('filled', 'red', 'blue');
             }
         }
-    }
-
-    if (checkWin(gameState, 'red')) {
-        alert('Red player wins!');
-    } else if (checkWin(gameState, 'blue')) {
-        alert('Blue player wins!');
     }
 }
 
