@@ -1,9 +1,13 @@
 FROM node:latest
 
-WORKDIR /usr/app
+WORKDIR /usr/app/client
+
 COPY package.json .
 RUN npm install
 
 COPY public public
 COPY index.js .
-ENTRYPOINT ["node", "index.js"]
+
+EXPOSE 8080
+
+CMD ["node", "index.js"]

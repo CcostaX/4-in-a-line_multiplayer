@@ -1,4 +1,6 @@
-const socket = io("ws://localhost:3000");
+//const socket = io("ws://localhost:3000");
+const socket = io('http://server_container:3000');
+
 
 const board = document.getElementById('game-board');
 const textWin = document.getElementById('textWin');

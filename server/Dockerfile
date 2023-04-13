@@ -7,5 +7,6 @@ RUN npm install
 
 COPY index.js .
 
+EXPOSE 3000
 ENV DATABASE_URI="host.docker.internal"
 ENTRYPOINT ["node", "index.js"]
