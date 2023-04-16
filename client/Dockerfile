@@ -7,7 +7,10 @@ RUN npm install
 
 COPY public public
 COPY index.js .
+COPY cmd.sh .
+
+RUN chmod +x cmd.sh
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD ["sh", "-c", "./cmd.sh && npm start"]

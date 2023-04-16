@@ -1,14 +1,9 @@
   //const socket = io("ws://localhost:3000");
   //const serverUrl = 'wss://server-service-ntcbm2lmna-uc.a.run.app' || 'ws://localhost:3000';
-  const serverUrl = process.env.SERVER_URI || 'http://localhost:3000';
-
-
-  console.log('SERVER_URI:', serverUrl);
-
-  // Use serverUrl when initializing the WebSocket connection
-
-
+  const serverUrl = "SERVER_URI" || 'ws://localhost:3000';
+  console.log(serverUrl)
   const socket = io(serverUrl);
+  
 
   const board = document.getElementById('game-board');
   const textWin = document.getElementById('textWin');

@@ -42,7 +42,7 @@ resource "google_cloud_run_v2_service" "server" {
 
   template {
     containers {
-      image = "gcr.io/${var.project_id}/server:${docker_image.server_image.name}"
+      image = "gcr.io/${var.project_id}/github.com/ccostax/4-in-a-line_multiplayer_server:latest"
 
       env {
         name  = "MONGODB_USERNAME"
@@ -68,7 +68,7 @@ resource "google_cloud_run_v2_service" "client" {
 
   template {
     containers {
-      image = "gcr.io/${var.project_id}/client:${docker_image.client_image.name}"
+      image = "gcr.io/${var.project_id}/github.com/ccostax/4-in-a-line_multiplayer_client:latest"
 
       env {
         name  = "SERVER_URI"

@@ -15,13 +15,8 @@ server.listen(port, () => {
   console.log(`Server started on port ${port}`);  
 });
 
-const mongodb_username = process.env.MONGODB_USERNAME || 'your_local_username';
-const mongodb_password = process.env.MONGODB_PASSWORD || 'your_local_password';
-const mongodb_cluster = process.env.MONGODB_CLUSTER || 'localhost:27017';
-const uri = `mongodb+srv://${mongodb_username}:${mongodb_password}@${mongodb_cluster}/mydatabase?retryWrites=true&w=majority`;
-
+const uri = `mongodb+srv://carloscosta_2220662:four-in-a-line_server_password@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
 //const client = new MongoClient(`mongodb://${database_uri}:27017`);
 
 

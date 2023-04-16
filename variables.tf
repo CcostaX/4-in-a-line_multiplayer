@@ -17,7 +17,7 @@ variable "zone" {
 
 variable "mongodb_username" {
   description = "Mongo Username"
-  default     = "carloscosta1421"
+  default     = "carloscosta_2220662"
 }
 variable "mongodb_password" {
   description = "Mongo password"
