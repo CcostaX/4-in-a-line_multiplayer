@@ -1,23 +1,25 @@
-variable "external_client_port" { 
-    type = number
-    description = "External client"
-    default = 8080
+variable "project_id" {
+  description = "The project ID to deploy to."
+  default = "cnlabs-380119"
 }
 
-variable "external_server_port" { 
-    type = number
-    description = "External server"
-    default = 3000
+variable "region" {
+  description = "The region to deploy to."
+  default     = "us-central1"
 }
 
-variable "external_database_port" { 
-    type = number
-    description = "External mongodb"
-    default = 8080
+variable "zone" {
+  description = "The zone to deploy to."
+  default     = "us-central1-a"
 }
 
-variable "database_uri" { 
-    type = string
-    description = "Database_uri"
-    default = "host.docker.internal"
+
+
+variable "mongodb_username" {
+  description = "Mongo Username"
+  default     = "carloscosta1421"
+}
+variable "mongodb_password" {
+  description = "Mongo password"
+  default = "Bigodes142"
 }

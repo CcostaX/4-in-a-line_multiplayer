@@ -1,4 +1,4 @@
-FROM node:latest
+FROM --platform=linux/amd64 node:latest
 
 WORKDIR /usr/app/client
 
@@ -10,4 +10,4 @@ COPY index.js .
 
 EXPOSE 8080
 
-CMD ["node", "index.js"]
+CMD [ "npm", "start" ]
