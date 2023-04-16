@@ -43,7 +43,9 @@
 
       hideButton();
   });
-  socket.emit('joinRoom');
+  setTimeout(() => {
+    socket.emit('joinRoom');
+  }, 1000);
 
   socket.on('yourTurn', () => {
       myTurn = true;
