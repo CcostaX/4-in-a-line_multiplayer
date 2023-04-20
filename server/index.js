@@ -15,11 +15,18 @@ server.listen(port, () => {
   console.log(`Server started on port ${port}`);  
 });
 
+/*if (process.env.database_uri === "host.docker.internal") {
+  client = new MongoClient(`mongodb://${process.env.database_uri}:27017`);
+  console.log("Trying to access MongoDB local")
+
+} else {
+  const uri = `mongodb+srv://carloscosta_2220662:four-in-a-line_server_password@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
+  client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log("Trying to access to MongoDB Atlas")
+}*/
+
 const uri = `mongodb+srv://carloscosta_2220662:four-in-a-line_server_password@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-//const client = new MongoClient(`mongodb://${database_uri}:27017`);
-
+client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const messages_collection = client.db('game').collection('messages')
 

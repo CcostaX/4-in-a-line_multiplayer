@@ -102,7 +102,26 @@ resource "google_cloud_run_v2_service_iam_policy" "client_policy" {
 
 
 
-  /*resource "docker_container" "client_container" {
+  /*
+  terraform {
+    required_providers {
+      docker = {
+        source = "kreuzwerker/docker"
+      }
+    }
+  }
+
+  provider "docker" {}
+
+  resource "docker_image" "client_image" {
+    name         = "client"
+    keep_locally = false
+    build {
+      context    = "./client"
+      dockerfile = "Dockerfile"  
+    }
+  }
+  resource "docker_container" "client_container" {
     image = docker_image.client_image.name
     name  = "client_container"
 
