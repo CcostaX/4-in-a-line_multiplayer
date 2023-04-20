@@ -17,6 +17,7 @@ server.listen(port, () => {
 
 const uri = `mongodb+srv://carloscosta_2220662:four-in-a-line_server_password@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 //const client = new MongoClient(`mongodb://${database_uri}:27017`);
 
 

@@ -1,0 +1,12 @@
+#terraform
+.terraform
+
+terraform/
+*.tfstate
+.tfstate.
+.lock.
+
+#json
+cnlabs-380119-76e777010ed0.json
+client/package-lock.json
+server/package-lock.json
