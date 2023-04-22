@@ -23,7 +23,6 @@ resource "docker_image" "client_image" {
   keep_locally = false
   build {
     context    = "./client"
-    dockerfile = "Dockerfile"  
   }
 }
 
@@ -32,7 +31,6 @@ resource "docker_image" "server_image" {
   keep_locally = false
   build {
     context    = "./server"
-    dockerfile = "Dockerfile"
   }
 }
 
