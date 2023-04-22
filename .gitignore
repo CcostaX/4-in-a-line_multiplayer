@@ -1,13 +1,15 @@
 #terraform
-.terraform
-
-terraform/
-*.tfstate
-.tfstate.
-.lock.
-.lock.hcl
+.terraform/
+.terraform.lock
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
 
 #json
 cnlabs-380119-76e777010ed0.json
 client/package-lock.json
 server/package-lock.json
+server/.env
+
+# Node.js
+node_modules/
