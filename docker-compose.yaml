@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     depends_on:
       - database
+    env_file:
+      - ./server/.env
   client:
     image: client-image
     build: ./client
