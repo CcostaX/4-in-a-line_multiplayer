@@ -26,7 +26,6 @@ else {
   const uri = `mongodb+srv://${username}:${password}@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
   client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   console.log("Trying to connect to MongoDB Atlas");
-  console.log("URIIIIIIIIIIIIIIIIIIIIIIIIIII: " + uri);
 }
 
 const messages_collection = client.db('game').collection('messages')
@@ -35,7 +34,6 @@ async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected to MongoDB');
-    console.log('USERNAME AND PASSWORD: ' + username + ":" + password);
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
   }
