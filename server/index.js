@@ -35,6 +35,7 @@ async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected to MongoDB');
+    console.log('USERNAME AND PASSWORD: ' + username + ":" + password);
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
   }
