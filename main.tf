@@ -23,6 +23,7 @@ resource "docker_image" "client_image" {
   keep_locally = false
   build {
     context    = "./client"
+    dockerfile = "Dockerfile"  
   }
 }
 
@@ -31,6 +32,7 @@ resource "docker_image" "server_image" {
   keep_locally = false
   build {
     context    = "./server"
+    dockerfile = "Dockerfile"
   }
 }
 
@@ -55,11 +57,6 @@ resource "google_cloud_run_v2_service" "server" {
       env {
         name  = "MONGODB_CLUSTER"
         value = "clustercnn.yt5qi60.mongodb.net"
-      }
-
-      env {
-        name  = "database_uri"
-        value = "cloud"
       }
     }
   }

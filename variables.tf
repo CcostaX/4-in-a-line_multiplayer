@@ -16,11 +16,10 @@ variable "zone" {
 
 
 variable "mongodb_username" {
-  description = "MongoDB Atlas username"
-  type        = string
+  description = "Mongo Username"
+  default     = "carloscosta_2220662"
 }
-
 variable "mongodb_password" {
-  description = "MongoDB Atlas password"
-  type        = string
+  description = "Mongo password"
+  default = "Bigodes142"
 }

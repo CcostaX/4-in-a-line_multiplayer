@@ -19,13 +19,8 @@ server.listen(port, () => {
 });
 
 if (process.env.database_uri === "host.docker.internal") {
-  const username = process.env.MONGODB_USERNAME;
-  const password = process.env.MONGODB_PASSWORD;
-
-  const uri = `mongodb+srv://${username}:${password}@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
-  client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  console.log("URIIIIIIIIIIIIIIIIIIIIIIIIIII: " + uri);
-  console.log("Trying to connect to MongoDB Atlas");
+  client = new MongoClient(`mongodb://${process.env.database_uri}:27017`);
+  console.log("Trying to connect to MongoDB locally");
 } 
 else {
   const username = process.env.MONGODB_USERNAME;
@@ -33,7 +28,6 @@ else {
 
   const uri = `mongodb+srv://${username}:${password}@clustercnn.yt5qi60.mongodb.net/?retryWrites=true&w=majority`;
   client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  console.log("URIIIIIIIIIIIIIIIIIIIIIIIIIII: " + uri);
   console.log("Trying to connect to MongoDB Atlas");
 }
 
