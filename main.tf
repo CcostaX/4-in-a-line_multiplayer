@@ -58,6 +58,11 @@ resource "google_cloud_run_v2_service" "server" {
         name  = "MONGODB_CLUSTER"
         value = "clustercnn.yt5qi60.mongodb.net"
       }
+
+      env {
+        name  = "database_uri"
+        value = "cloud"
+      }
     }
   }
 }
