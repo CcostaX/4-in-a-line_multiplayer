@@ -17,28 +17,41 @@ Cloud Deployment (Google Cloud and Terraform): In the cloud deployment scenario,
 
 # RUN LOCALLY (DOCKER)
 To test the application locally, the user needs:
-  •	Have the Docker application opened.
-  •	Open a command prompt and going to the project folder path.
-  •	Use these commands to deploy to docker
-    o	docker-compose down
-    o	docker-compose build
-    o	docker-compose up -d
-•	Test the application with the URL provided in Docker (test the application in client: localhost:8080)
+  o	Have the Docker application opened.
+  
+  o	Open a command prompt and going to the project folder path.
+  o	Use these commands to deploy to docker
+  
+    docker-compose down
+    docker-compose build
+    docker-compose up -d
+    
+o	Test the application with the URL provided in Docker (test the application in client: localhost:8080)
 
 # RUN IN CLOUD (GOOGLE CLOUD AND TERRAFORM)
 To test the application in the cloud, the user needs:
-  •	A key .json file for the credentials in Google Cloud
-  •	Create an account in MongoDB Atlas or use a provided account.
-  •	Create or use the file "terraform.tfvars”, to insert the credentials:
-    o	Project_id = “id of your google cloud project)
-    o	Region (it depends on your region, In this project it was used “us-central1”)
-    o	Zone (it depends on your region and zone, In this project it was used “us-central1-a”)
-    o	Mongodb_username (username of your MongoDB Atlas)
-    o	Mongodb_password (password of your MongoDB Atlas)
-  •	Deploy the application using:
-    o	Terraform init
-    o	Terraform apply
-    o	Terraform destroy (if your done using the application to not waste resources)
-  •	Test the application with the URL provided in Google Cloud Run
+
+o	A key .json file for the credentials in Google Cloud
+
+o	Create an account in MongoDB Atlas or use a provided account.
+
+o	Create or use the file "terraform.tfvars”, to insert the credentials:
+
+  •	Project_id = “id of your google cloud project)
+  •	Region (it depends on your region, In this project it was used “us-central1”)
+  
+  •	Zone (it depends on your region and zone, In this project it was used “us-central1-a”)
+  
+  •	Mongodb_username (username of your MongoDB Atlas)
+  
+  •	Mongodb_password (password of your MongoDB Atlas)
+  
+o	Deploy the application using:
+
+    Terraform init   
+    Terraform apply 
+    Terraform destroy //(if your done using the application to not waste resources)
+    
+o	Test the application with the URL provided in Google Cloud Run
 
 
