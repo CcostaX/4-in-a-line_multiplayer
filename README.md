@@ -52,6 +52,4 @@ o	Deploy the application using:
     Terraform apply 
     Terraform destroy //(if your done using the application to not waste resources)
     
-o	Test the application with the URL provided in Google Cloud Run
-
-
+o	Test the application with the URL provided in Google Cloud Run: https://client-service-ntcbm2lmna-uc.a.run.app
